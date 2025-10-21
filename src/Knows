@@ -1,0 +1,290 @@
+
+
+1. React Basics
+
+Components: React apps are made up of components. A component is like a JavaScript function or class that returns UI (described using JSX).
+JSX: React uses JSX, a syntax extension that looks like HTML but is actually JavaScript.
+Props: Short for properties — inputs to components.
+State: Internal data of a component that can change over time.
+Events: React handles events similarly to DOM events but with some syntactic differences.
+
+2. Setting Up
+To get started quickly, the easiest way is:
+
+Use Create React App:
+
+npx create-react-app my-react-app
+cd my-react-app
+npm start
+This will boot up a React development environment.
+
+
+3. Your First Component
+
+import React from "react";
+
+function HelloWorld() {
+  return <h1>Hello, world!</h1>;
+}
+
+export default HelloWorld;
+
+4. JSX
+Looks like HTML but you write it in JavaScript.
+You can embed JavaScript expressions inside braces {}.
+Example:
+
+
+function Greeting({ name }) {
+  return <p>Hello, {name}!</p>;
+}
+
+use : <Greeting name="Alice" />
+
+5. Props
+Props are how parent components pass data to child components.
+
+function UserCard(props) {
+  return (
+    <div>
+      <h2>{props.name}</h2>
+      <p>Email: {props.email}</p>
+    </div>
+  );
+}
+Use:
+
+<UserCard name="Bob" email="bob@example.com" />
+
+
+6. State
+State is data managed inside a component that, when updated, causes the UI to re-render.
+
+Using Function component with Hooks:
+
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0); // count is state variable, setCount updates it
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+
+
+Or with class components:
+
+
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = { count: 0 };
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={this.increment}>Click me</button>
+      </div>
+    );
+  }
+}
+
+7. Handling Events
+Events are like handlers for user actions.
+
+
+Absolutely! I'd be happy to teach you React step-by-step. React is a powerful JavaScript library for building user interfaces, primarily for single-page applications. It lets you create reusable components that manage their own state and compose them to build complex UIs.
+
+1. React Basics
+Components: React apps are made up of components. A component is like a JavaScript function or class that returns UI (described using JSX).
+JSX: React uses JSX, a syntax extension that looks like HTML but is actually JavaScript.
+Props: Short for properties — inputs to components.
+State: Internal data of a component that can change over time.
+Events: React handles events similarly to DOM events but with some syntactic differences.
+2. Setting Up
+To get started quickly, the easiest way is:
+
+Use Create React App:
+bash
+Copy code
+npx create-react-app my-react-app
+cd my-react-app
+npm start
+This will boot up a React development environment.
+
+3. Your First Component
+jsx
+Copy code
+import React from "react";
+
+function HelloWorld() {
+  return <h1>Hello, world!</h1>;
+}
+
+export default HelloWorld;
+In App.js replace the existing content with:
+
+jsx
+Copy code
+import React from "react";
+import HelloWorld from "./HelloWorld";
+
+function App() {
+  return (
+    <div>
+      <HelloWorld />
+    </div>
+  );
+}
+
+export default App;
+4. JSX
+Looks like HTML but you write it in JavaScript.
+You can embed JavaScript expressions inside braces {}.
+Example:
+
+jsx
+Copy code
+function Greeting({ name }) {
+  return <p>Hello, {name}!</p>;
+}
+Use:
+
+jsx
+Copy code
+<Greeting name="Alice" />
+5. Props
+Props are how parent components pass data to child components.
+
+Example:
+
+jsx
+Copy code
+function UserCard(props) {
+  return (
+    <div>
+      <h2>{props.name}</h2>
+      <p>Email: {props.email}</p>
+    </div>
+  );
+}
+Use:
+
+jsx
+Copy code
+<UserCard name="Bob" email="bob@example.com" />
+6. State
+State is data managed inside a component that, when updated, causes the UI to re-render.
+
+Using Function component with Hooks:
+
+jsx
+Copy code
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0); // count is state variable, setCount updates it
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+Or with class components:
+
+jsx
+Copy code
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = { count: 0 };
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={this.increment}>Click me</button>
+      </div>
+    );
+  }
+}
+7. Handling Events
+Events are like handlers for user actions.
+
+<button onClick={() => alert('Hello!')}>Click Me</button>
+
+
+8. Conditional Rendering
+React supports JavaScript conditions inside JSX.
+Example:
+
+
+<button onClick={() => alert('Hello!')}>Click Me</button>
+
+function Greeting({ isLoggedIn }) {
+  if (isLoggedIn) {
+    return <h1>Welcome back!</h1>;
+  }
+  return <h1>Please sign up.</h1>;
+}
+
+
+9. Lists and Keys
+Rendering lists:
+function UserList({ users }) {
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name} ({user.email})</li>
+      ))}
+    </ul>
+  );
+}
+
+
+10. Example: Simple Todo App
+import React, { useState } from "react";
+
+function TodoApp() {
+  const [tasks, setTasks] = useState([]);
+  const [input, setInput] = useState("");
+
+  const addTask = () => {
+    if (!input.trim()) return;
+    setTasks([...tasks, input]);
+    setInput("");
+  };
+
+  return (
+    <div>
+      <h1>Todo List</h1>
+      <input value={input} onChange={e => setInput(e.target.value)} placeholder="Enter task"/>
+      <button onClick={addTask}>Add</button>
+
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>{task}</li>  
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TodoApp;
+
+//https://aichat.omigroup.vn/c/ada919df-03a7-422f-838c-100bc751ef88
